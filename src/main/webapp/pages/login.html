@@ -1,0 +1,46 @@
+  <style type="text/css">
+    body > .grid {
+      height: 100%;
+    }
+    .image {
+      margin-top: 100px;
+    }
+    .column {
+      max-width: 450px;
+    }
+  </style>
+
+<div class="ui middle aligned center aligned grid" style="margin-top:50px;">
+  <div class="column">
+    <h2 class="ui image header" style="color:#1f88be;">
+      <img src="/images/logo.png" class="image">
+      <div class="content">
+        Log-in to your account
+      </div>
+    </h2>
+    <form ng-submit="login()" class="ui large form">
+      <div class="ui stacked segment">
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="user icon"></i>
+            <input type="text" class="form-control" ng-model="username" placeholder="username" required=""/>
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="lock icon"></i>
+            <input type="password" class="form-control" ng-model="password" placeholder="password" required=""/>
+          </div>
+        </div>
+        <button type="submit" class="ui fluid large submit button" style="background-color:#1f88be; color:white;">Sign in</button>
+      </div>
+
+      <div class="ui error message">{{ error }}</div>
+
+    </form>
+
+    <div class="ui message">
+      New to us? <a ui-sref="signup">Sign Up</a>
+    </div>
+  </div>
+</div>

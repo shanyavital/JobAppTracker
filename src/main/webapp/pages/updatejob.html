@@ -1,0 +1,34 @@
+<div class="col-md-12">
+      <h3>Update Job Page</h3>
+      
+
+      <form ng-submit="updatejob(updatedjob)" class="form">
+        <div class="col-md-4">
+          <div class="form-group">
+            <input type="text" class="form-control" ng-bind ="job.company" ng-model="updatedjob.company" placeholder="company" required=""/>
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" ng-bind="job.title" ng-model="updatedjob.title" placeholder="title" required=""/>
+          </div> 
+          <div class="form-group">
+            <textarea cols="35" rows="10" class="form-control" ng-bind="job.description" ng-model="updatedjob.description" placeholder="description" required=""></textarea>
+          </div> 
+          <div class="form-group">
+            <input type="text" class="form-control" ng-bind="job.url" ng-model="updatedjob.url" placeholder="url" required=""/>
+          </div> 
+          <div class="form-group">
+            <input type="text" class="form-control" ng-bind="job.date" ng-model="updatedjob.date" placeholder="date" required=""/>
+          </div> 
+          <div class="form-group">
+            <input type="text" class="form-control" ng-bind="job.contact" ng-model="updatedjob.contact" placeholder="contact" required=""/>
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" ng-bind="job.status" ng-model="updatedjob.status" placeholder="status" required=""/>
+          </div>  
+          <div class="form-group">
+            <button type="submit" class="btn btn-success">Update</button>
+            <span class="text-danger">{{ error }}</span>
+          </div>
+        </div>
+      </form>
+    </div>

@@ -1,0 +1,233 @@
+
+<div class="ui inverted menu" style="background-color:#1f88be;">
+			  
+				  <div class="item">
+				    <img src="/images/logo.png">
+				  </div>
+				    <a class="item active" ng-click="status(5)">Home</a>
+				    <a class="item" ng-click="status(1)">Wish List</a>
+				    <a class="item" ng-click="status(2)">Applied</a>
+				    <a class="item" ng-click="status(3)">Interview</a>
+				    <a class="item" ng-click="status(4)">Rejected</a>
+					<div class="right menu">
+					
+						<div class="ui simple dropdown item">
+						 {{ user.name }}<i class="dropdown icon"></i>
+							      <div class="menu">
+							        <a class="item" ng-click="logout()">Logout</a>
+							        <a class="item" ng-click="profile()">Profile</a>
+							      </div>
+	    				</div>
+    				</div>
+			 
+		</div>
+
+<div class="ui middle aligned basic segment" style="margin-right: auto ;margin-left: auto; padding-right: 15px; padding-left: 15px;">
+
+     <div class="ui cards" style="margin: auto;">
+     
+     	<div class="card" style="background-color:#F5F8F9; display: flex; align-items: center; justify-content: center;">
+		     <a  ng-click="addModal()"><i class="huge plus circle icon" style="color:#1f88be;"></i></a>
+		     <br><span><h3>Add New Job</h3></span>
+     	</div>
+     
+  		<div ng-repeat="job in jobs | filter:{ status: by_status }| orderBy : date : true" class="card">
+   		 <div class="content">
+      		<div class="header">{{ job.company }}</div>
+      			<div class="ui tiny header">
+		    	{{job.title}}
+		    	
+		    </div>		
+   		 </div>
+   		 
+   		 <div class="ui linkedin attached button" ng-click="updateModal (job)">
+   		 			Update
+   		 </div>
+   		 <div class="ui bottom attached button" ng-click="call(job)">
+     	 	<i class="add icon"></i>More Details</div>
+
+ 	
+  		</div>
+  		
+  		
+  	</div>
+  
+
+      
+      
+    
+      
+      
+        <div class="ui small modal job" style="position: fixed; top: 3%;" ng-controller="HomeController">
+		  <i class="close icon"></i>
+		  <div class="header"><h2>{{ job1.company }}</h2></div>
+		  <div class="scrolling content">
+
+		    	<h3 class="ui header">{{job1.title}} </h3>
+		    	<h3 class="ui sub header">Added at : {{ job1.date }}</h3>
+		    	<div class="ui padded list">
+				  <div class="item">
+				    <i class="marker icon"></i>
+				    <div class="content">
+				      {{ job1.location }}
+			 		 </div>
+				  </div>
+			  
+				  <div class="item">
+				    <i class="mail icon"></i>
+				    <div class="content">
+				      <a href="mailto:{{ job1.contact }}">{{ job1.contact }}</a>
+					</div>
+				  </div>
+				  
+				  <div class="item">
+					<i class="linkify icon"></i>
+				    <div class="content">
+				      <a href="{{ job1.url }}">{{ job1.url }}</a>
+				   </div>
+				  </div>
+				  
+				  
+				  
+				</div>
+		    <pre>{{ job1.description }}</pre>
+		   </div>
+
+		  <div class="actions">
+		    <div class="ui positive labled icon button">OK</div>
+		     <div class="ui red labled icon button" ng-click="deletejob(job1)">DELETE</div>
+		  </div>
+		</div>
+		
+		
+		
+		
+		
+		<div class="ui modal add" style="position: fixed; top: 3%;" ng-controller="HomeController">
+		  
+		  <i class="close icon"></i>
+		  <div class="header"><h2>Add New Job</h2></div>
+		  <div class="scrolling content">
+		  
+
+		    	<form ng-submit="addjob()" class="form">
+			        
+			          <div class="form-group">
+			            <input type="text" class="form-control" ng-model="job.company" placeholder="company" required=""/>
+			          </div>
+			          <div class="form-group">
+			            <input type="text" class="form-control" ng-model="job.title" placeholder="title" required=""/>
+			          </div> 
+			          <div class="form-group">
+			            <textarea cols='35' rows='6' class="form-control" ng-model="job.description" placeholder="description" required=""></textarea>
+			          </div> 
+			          <div class="form-group">
+			            <input type="text" class="form-control" ng-model="job.url" placeholder="url" required=""/>
+			          </div> 
+			          <div class="form-group">
+			            <input type="text" class="form-control" ng-model="job.location" placeholder="location" required=""/>
+			          </div> 
+			          <div class="form-group">
+			            <input type="text" class="form-control" ng-model="job.contact" placeholder="contact" required=""/>
+			          </div> 
+			          <div class="form-group">
+			          	<select class="ui fluid dropdown" ng-model="job.status">
+			        		<option value="Wishlist">Wishlist</option>
+			        		<option value="Applied">Applied</option>
+			        		<option value="Interview">Interview</option>
+			        		<option value="Rejected">Rejected</option>
+			          	</select>
+			          </div> 
+			          <div class="form-group">
+			            <button type="submit" class="btn btn-success">Add Job</button>
+			            <span class="text-danger">{{ error }}</span>
+			          </div>
+			       
+			      </form>
+		   
+			</div>
+		</div>
+		
+		
+		
+		<div class="ui modal update" style="position: fixed; top: 3%;" ng-controller="HomeController">
+		  <i class="close icon"></i>
+		  <div class="header"><h2>Update</h2></div>
+		  <div class="scrolling content">
+
+		    	<form ng-submit="updatejob(updatedjob)" class="form">
+			          <div class="form-group">
+			            <input type="text" class="form-control" ng-bind ="job.company" ng-model="updatedjob.company" placeholder="company" required=""/>
+			          </div>
+			          <div class="form-group">
+			            <input type="text" class="form-control" ng-bind="job.title" ng-model="updatedjob.title" placeholder="title" required=""/>
+			          </div> 
+			          <div class="form-group">
+			            <textarea cols="35" rows="6" class="form-control" ng-bind="job.description" ng-model="updatedjob.description" placeholder="description" required=""></textarea>
+			          </div> 
+			          <div class="form-group">
+			            <input type="text" class="form-control" ng-bind="job.url" ng-model="updatedjob.url" placeholder="url" required=""/>
+			          </div> 
+			          <div class="form-group">
+			            <input type="text" class="form-control" ng-bind="job.location" ng-model="updatedjob.location" placeholder="location" required=""/>
+			          </div> 
+			          <div class="form-group">
+			            <input type="text" class="form-control" ng-bind="job.contact" ng-model="updatedjob.contact" placeholder="contact" required=""/>
+			          </div>
+			          <div class="form-group">
+			            <button type="submit" class="btn btn-success">Update</button>
+			            <span class="text-danger">{{ error }}</span>
+			          </div>
+			      </form>
+			      	
+		   </div>
+		   
+
+		</div>
+		
+		<div class="ui modal profile" style="position: fixed; top: 3%;" ng-controller="HomeController">
+		  <i class="close icon"></i>
+		  <div class="header"><h2>{{ user.name }} Profile</h2></div>
+		  	<div class="scrolling content">
+
+		    	<form ng-submit="updateuser()" class="form">
+			          <div class="form-group">
+			            <input type="text" class="form-control" ng-bind ="user.name" ng-model="user.name" placeholder="name" required=""/>
+			          </div>
+			          <div class="form-group">
+			            <input type="text" class="form-control" ng-bind ="user.last" ng-model="user.last" placeholder="last" required=""/>
+			          </div>
+			          <div class="form-group">
+			            <input type="text" class="form-control" ng-bind ="user.email" ng-model="user.email" placeholder="email" required=""/>
+			          </div>
+			          <div class="form-group">
+			            <input type="text" class="form-control" ng-bind ="user.password" ng-model="user.password" required=""/>
+			          </div>
+			          
+			          <div class="form-group">
+			            <button type="submit" class="btn btn-success">Update</button>
+			            <span class="text-danger">{{ error }}</span>
+			          </div>
+			      </form>
+			      	
+		   </div>
+		    <div class="actions">
+		    <div class="ui positive labled icon button">OK</div>
+		  </div>
+
+		</div>
+ 
+    </div>
+
+   <div class="ui inverted vertical footer segment" style="background-color:#1f88be; margin-top:150px;">
+    <div class="ui center aligned container">
+
+      <img src="/images/logo.png" class="ui centered mini image"> 
+      <div class="ui horizontal inverted small divided link list">
+        <a class="item" href="#">Site Map</a>
+        <a class="item" href="#">Contact Us</a>
+        <a class="item" href="#">Terms and Conditions</a>
+        <a class="item" href="#">Privacy Policy</a>
+      </div>
+    </div>
+  </div>

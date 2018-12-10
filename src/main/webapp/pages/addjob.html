@@ -1,0 +1,30 @@
+<div class="col-md-12">
+      <h3>Add Job Page</h3>
+      
+      <form ng-submit="addjob()" class="form">
+        <div class="col-md-4">
+          <div class="form-group">
+            <input type="text" class="form-control" ng-model="job.company" placeholder="company" required=""/>
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" ng-model="job.title" placeholder="title" required=""/>
+          </div> 
+          <div class="form-group">
+            <textarea cols='35' rows='10' class="form-control" ng-model="job.description" placeholder="description" required=""></textarea>
+          </div> 
+          <div class="form-group">
+            <input type="text" class="form-control" ng-model="job.url" placeholder="url" required=""/>
+          </div> 
+          <div class="form-group">
+            <input type="text" class="form-control" ng-model="job.date" placeholder="date" required=""/>
+          </div> 
+          <div class="form-group">
+            <input type="text" class="form-control" ng-model="job.contact" placeholder="contact" required=""/>
+          </div>  
+          <div class="form-group">
+            <button type="submit" class="btn btn-success">Add Job</button>
+            <span class="text-danger">{{ error }}</span>
+          </div>
+        </div>
+      </form>
+    </div>
